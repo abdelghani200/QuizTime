@@ -37,3 +37,8 @@ Ce premier module sera réalisé dans le cadre d’une plateforme complète de E
 * Les opérations ORM doivent être implémentées avec spring Data.
 * La sécurisation de l’API ne sera pas traitée dans ce premier module.
 * Les fonctionnalités critiques de l’application doivent être testées.
+
+# # Lien de diagramme de classe :
+
+https://lucid.app/lucidchart/99a24783-8875-4570-9a50-31792887c1e1/edit?viewport_loc=1568%2C1455%2C1948%2C820%2CHWEp-vi-RSFO&invitationId=inv_ebb9cde3-3f37-4151-882e-a3648e3e8ddc
+  
