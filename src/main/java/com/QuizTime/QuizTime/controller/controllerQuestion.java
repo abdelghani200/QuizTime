@@ -18,6 +18,11 @@ public class controllerQuestion {
     private questionService ServiceQues;
 
 
+    @GetMapping("/listeQuestions")
+    public List<Question> getAllQuestions(){
+        return ServiceQues.getAll();
+    }
+
     @PostMapping("/newQuestion")
     public Question saveQuestion(@RequestBody Question question){
         return ServiceQues.saveQuestion(question);
@@ -34,5 +39,7 @@ public class controllerQuestion {
         ServiceQues.deleteQuestion(id);
         return;
     }
+
+
 
 }

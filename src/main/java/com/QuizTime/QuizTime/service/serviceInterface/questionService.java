@@ -9,7 +9,7 @@ import java.util.Map;
 @Service
 public interface questionService {
 
-
+    List<Question> getAll();
 
     Question saveQuestion(Question question);
 

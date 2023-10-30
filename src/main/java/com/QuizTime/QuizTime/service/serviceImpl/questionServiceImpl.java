@@ -16,6 +16,11 @@ public class questionServiceImpl implements questionService {
     private questionRepository Repoquestion;
 
     @Override
+    public List<Question> getAll() {
+        return Repoquestion.findAll();
+    }
+
+    @Override
     public Question saveQuestion(Question question) {
         return Repoquestion.save(question);
     }
