@@ -26,5 +26,11 @@ public class questionServiceImpl implements questionService {
         return Repoquestion.save(question);
     }
 
+    @Override
+    public void deleteQuestion(long id){
+        Repoquestion.deleteById(id);
+    }
+
+
 
 }

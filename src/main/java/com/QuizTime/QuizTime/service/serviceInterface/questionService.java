@@ -15,4 +15,6 @@ public interface questionService {
 
     Question updateQuestion(Question question, int id);
 
+    void deleteQuestion(long id);
+
 }

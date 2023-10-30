@@ -29,5 +29,10 @@ public class controllerQuestion {
         return question;
     }
 
+    @DeleteMapping("/{questionId}")
+    public void deleteQuestion(@PathVariable("questionId") long id) {
+        ServiceQues.deleteQuestion(id);
+        return;
+    }
 
 }
