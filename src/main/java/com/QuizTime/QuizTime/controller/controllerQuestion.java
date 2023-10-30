@@ -23,8 +23,11 @@ public class controllerQuestion {
         return ServiceQues.saveQuestion(question);
     }
 
-
-
+    @PutMapping("/Questions")
+    public Question updateQuestion(@RequestBody Question question){
+        ServiceQues.saveQuestion(question);
+        return question;
+    }
 
 
 }

@@ -13,6 +13,6 @@ public interface questionService {
 
     Question saveQuestion(Question question);
 
-
+    Question updateQuestion(Question question, int id);
 
 }

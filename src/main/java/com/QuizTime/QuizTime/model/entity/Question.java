@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Time;
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -23,10 +23,6 @@ public class Question {
     private Integer answerNumber;
     private Integer answerCorrectNumber;
     private String text;
-    /*
-    private Time duration;
-     */
-    private Boolean timed;
     private TypeAnswer type;
     private Double scorePoints;
 

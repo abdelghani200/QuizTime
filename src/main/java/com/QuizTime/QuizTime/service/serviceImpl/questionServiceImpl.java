@@ -21,6 +21,10 @@ public class questionServiceImpl implements questionService {
     }
 
 
+    @Override
+    public Question updateQuestion(Question question, int id) {
+        return Repoquestion.save(question);
+    }
 
 
 }
