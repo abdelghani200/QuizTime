@@ -3,12 +3,11 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/QuizTime
+    url: jdbc:postgresql://db:5432/QuizTime
     username: postgres
     password: youcode2023
   jpa:
     hibernate:
       ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
-
-
