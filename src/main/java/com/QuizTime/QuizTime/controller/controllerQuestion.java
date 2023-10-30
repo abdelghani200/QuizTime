@@ -1,14 +1,12 @@
 package com.QuizTime.QuizTime.controller;
 
 import com.QuizTime.QuizTime.model.entity.Question;
-import com.QuizTime.QuizTime.model.entity.Student;
 import com.QuizTime.QuizTime.service.serviceInterface.questionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 
@@ -40,6 +38,11 @@ public class controllerQuestion {
         return;
     }
 
+
+    @GetMapping("/Question/{questionId}")
+    public Optional<Question> getOneQuestion(@PathVariable("questionId") long id){
+        return ServiceQues.getOne(id);
+    }
 
 
 }
