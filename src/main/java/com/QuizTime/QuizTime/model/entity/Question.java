@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +23,21 @@ public class Question {
     private Integer answerNumber;
     private Integer answerCorrectNumber;
     private String text;
+    /*
     private Time duration;
+     */
+    private Boolean timed;
     private TypeAnswer type;
     private Double scorePoints;
+
+    @ManyToOne
+    private Quiz quiz;
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answerList;
+
+    @ManyToOne
+    private Level level;
+    @ManyToOne
+    private Subject subject;
 
 }

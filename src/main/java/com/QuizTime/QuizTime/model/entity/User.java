@@ -25,4 +25,6 @@ public abstract class User {
     protected LocalDate dateOfBirth;
     protected String address;
 
+
+
 }
