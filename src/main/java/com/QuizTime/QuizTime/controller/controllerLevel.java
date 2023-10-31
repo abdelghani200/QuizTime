@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.controller;
 
+import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class controllerLevel {
     @GetMapping("/level/{levelId}")
     public Optional<Level> getOneLevel(@PathVariable("levelId") Integer id) {
         return Level_service.getOne(id);
+    }
+
+    @PutMapping("/level/{levelId}")
+    public Level updateLevel(@PathVariable Integer levelId, @RequestBody Level level) throws ExceptionLevel {
+        return Level_service.updateLevel(level, levelId);
     }
 
 }

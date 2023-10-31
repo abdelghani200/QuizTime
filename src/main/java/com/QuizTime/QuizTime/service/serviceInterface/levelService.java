@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.service.serviceInterface;
 
+import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public interface levelService {
     Level saveLevel(Level level);
 
     Optional<Level> getOne(Integer id);
+
+    Level updateLevel(Level level, Integer id) throws ExceptionLevel;
 
 }
 
