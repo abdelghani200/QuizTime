@@ -24,4 +24,9 @@ public class subjectServiceImpl implements subjectService {
         return Repo_subject.save(subject);
     }
 
+    @Override
+    public void deleteSubject(Integer id) {
+        Repo_subject.deleteById(id);
+    }
+
 }
