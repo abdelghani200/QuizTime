@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.service.serviceImpl;
 
+import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
 import com.QuizTime.QuizTime.repository.levelRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
@@ -35,4 +36,17 @@ public class levelServiceImpl implements levelService {
     public Optional<Level> getOne(Integer id) {
         return Repo_level.findById(id);
     }
+
+    @Override
+    public Level updateLevel(Level level, Integer id) throws ExceptionLevel {
+        return Repo_level.findById(id)
+                .map(existingLevel -> {
+                    existingLevel.setDescription(level.getDescription());
+                    existingLevel.setMaxPoints(level.getMaxPoints());
+                    existingLevel.setMinPoints(level.getMinPoints());
+                    return Repo_level.save(existingLevel);
+                })
+                .orElseThrow(() -> new ExceptionLevel("Level not found with ID: " + id));
+    }
+
 }
