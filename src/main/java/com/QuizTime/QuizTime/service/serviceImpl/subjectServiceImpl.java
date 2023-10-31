@@ -19,5 +19,9 @@ public class subjectServiceImpl implements subjectService {
         return Repo_subject.findAll();
     }
 
+    @Override
+    public Subject saveSubject(Subject subject) {
+        return Repo_subject.save(subject);
+    }
 
 }
