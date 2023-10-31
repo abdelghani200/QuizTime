@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class controllerLevel {
@@ -26,6 +27,11 @@ public class controllerLevel {
     @PostMapping("/newLevel")
     public Level saveLevel(@RequestBody Level level) {
         return Level_service.saveLevel(level);
+    }
+
+    @GetMapping("/level/{levelId}")
+    public Optional<Level> getOneLevel(@PathVariable("levelId") Integer id) {
+        return Level_service.getOne(id);
     }
 
 }
