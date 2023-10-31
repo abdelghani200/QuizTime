@@ -4,6 +4,7 @@ import com.QuizTime.QuizTime.model.entity.Level;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface levelService {
@@ -12,6 +13,8 @@ public interface levelService {
     void deleteLevel(Integer id);
 
     Level saveLevel(Level level);
+
+    Optional<Level> getOne(Integer id);
 
 }
 

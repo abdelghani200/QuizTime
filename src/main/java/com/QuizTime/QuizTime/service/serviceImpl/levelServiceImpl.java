@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class levelServiceImpl implements levelService {
@@ -28,5 +29,10 @@ public class levelServiceImpl implements levelService {
     @Override
     public Level saveLevel( Level level) {
         return Repo_level.save(level);
+    }
+
+    @Override
+    public Optional<Level> getOne(Integer id) {
+        return Repo_level.findById(id);
     }
 }
