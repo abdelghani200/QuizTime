@@ -5,6 +5,7 @@ import com.QuizTime.QuizTime.repository.levelRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -22,5 +23,10 @@ public class levelServiceImpl implements levelService {
     @Override
     public void deleteLevel(Integer id) {
         Repo_level.deleteById(id);
+    }
+
+    @Override
+    public Level saveLevel( Level level) {
+        return Repo_level.save(level);
     }
 }

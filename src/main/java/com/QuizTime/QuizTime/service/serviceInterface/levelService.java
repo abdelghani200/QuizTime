@@ -11,6 +11,8 @@ public interface levelService {
     List<Level> getAllLevels();
     void deleteLevel(Integer id);
 
+    Level saveLevel(Level level);
+
 }
 
 
