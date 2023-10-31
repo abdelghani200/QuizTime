@@ -12,4 +12,6 @@ public interface subjectService {
 
     Subject saveSubject(Subject subject);
 
+    void deleteSubject(Integer id);
+
 }
