@@ -10,6 +10,6 @@ public interface subjectService {
 
     List<Subject> getAllSubjects();
 
-
+    Subject saveSubject(Subject subject);
 
 }
