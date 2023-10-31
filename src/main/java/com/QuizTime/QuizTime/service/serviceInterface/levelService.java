@@ -9,6 +9,7 @@ import java.util.List;
 public interface levelService {
 
     List<Level> getAllLevels();
+    void deleteLevel(Integer id);
 
 }
 
