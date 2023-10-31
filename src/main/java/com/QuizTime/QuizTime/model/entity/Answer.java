@@ -20,5 +20,5 @@ public class Answer {
     private Boolean correct;
 
     @ManyToOne
-    private Question questions;
+    private Question question;
 }
