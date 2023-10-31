@@ -18,4 +18,9 @@ public class levelServiceImpl implements levelService {
     public List<Level> getAllLevels() {
         return Repo_level.findAll();
     }
+
+    @Override
+    public void deleteLevel(Integer id) {
+        Repo_level.deleteById(id);
+    }
 }
