@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.service.serviceInterface;
 
+import com.QuizTime.QuizTime.exception.ExceptionSubject;
 import com.QuizTime.QuizTime.model.entity.Subject;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,7 @@ public interface subjectService {
     Subject saveSubject(Subject subject);
 
     void deleteSubject(Integer id);
+
+    Subject updateSubject(Subject subject, Integer id) throws ExceptionSubject;
 
 }
