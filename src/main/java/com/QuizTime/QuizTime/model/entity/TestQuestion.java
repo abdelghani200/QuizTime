@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "temporary_questions")
-public class TemporaryQuestion {
+public class TestQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;

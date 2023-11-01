@@ -23,4 +23,6 @@ public class Subject {
     @JoinColumn(name = "parent_subject_id")
     private List<Subject> children;
 
+    @OneToMany(mappedBy = "subject")
+    private List<Question> questions;
 }

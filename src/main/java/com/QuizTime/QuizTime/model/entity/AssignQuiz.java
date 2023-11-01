@@ -25,4 +25,10 @@ public class AssignQuiz {
     private Integer attemptNumber;
     private Double scoreFinal;
 
+    @ManyToOne
+    private Quiz quiz;
+
+    @ManyToOne
+    private Student student;
+
 }

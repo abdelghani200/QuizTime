@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +24,11 @@ public class Student extends User{
     @Column(updatable = false, nullable = false)
     private LocalDate registrationDate;
 
+    @OneToMany(mappedBy = "student")
+    private List<AssignQuiz> assignQuiz;
+
+    /*
     @Version
     private Integer version;
+     */
 }

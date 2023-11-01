@@ -23,6 +23,7 @@ public class Question {
     private Integer answerNumber;
     private Integer answerCorrectNumber;
     private String text;
+    @Enumerated(EnumType.STRING)
     private TypeAnswer type;
     private Double scorePoints;
 
@@ -35,5 +36,12 @@ public class Question {
     private Level level;
     @ManyToOne
     private Subject subject;
+    private Media media;
+    @OneToOne
+    private Validation validation;
+
+    @OneToMany(mappedBy = "quiz")
+    private List<AssignQuiz> assignedQuiz;
+
 
 }
