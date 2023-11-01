@@ -12,4 +12,6 @@ public interface answerService {
 
     Answer saveAnswer(Answer answer);
 
+    void deleteAnswer(Long id);
+
 }

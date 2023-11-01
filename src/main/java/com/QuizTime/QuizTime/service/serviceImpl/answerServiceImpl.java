@@ -22,4 +22,9 @@ public class answerServiceImpl implements answerService {
     public Answer saveAnswer(Answer answer) {
         return RepoAnswer.save(answer);
     }
+
+    @Override
+    public void deleteAnswer(Long id) {
+        RepoAnswer.deleteById(id);
+    }
 }
