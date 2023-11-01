@@ -28,7 +28,9 @@ public class Question {
     private Double scorePoints;
 
     @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = true)
     private Quiz quiz;
+
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
@@ -36,11 +38,12 @@ public class Question {
     private Level level;
     @ManyToOne
     private Subject subject;
+    @ManyToOne
     private Media media;
     @OneToOne
     private Validation validation;
 
-    @OneToMany(mappedBy = "quiz")
+    @ManyToMany
     private List<AssignQuiz> assignedQuiz;
 
 

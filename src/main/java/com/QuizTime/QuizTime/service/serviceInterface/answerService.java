@@ -10,4 +10,6 @@ public interface answerService {
 
     List<Answer> getAllAnswers();
 
+    Answer saveAnswer(Answer answer);
+
 }

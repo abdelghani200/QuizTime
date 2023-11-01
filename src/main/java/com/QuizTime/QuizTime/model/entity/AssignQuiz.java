@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,9 +25,11 @@ public class AssignQuiz {
     private Double scoreFinal;
 
     @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = true)
     private Quiz quiz;
 
     @ManyToOne
     private Student student;
+
 
 }

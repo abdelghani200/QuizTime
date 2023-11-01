@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "medias")
+@Table(name = "media_question")
 public class Media {
 
     @Id
@@ -20,4 +20,5 @@ public class Media {
     private String link;
     @Enumerated(EnumType.STRING)
     private MediaType type;
+
 }
