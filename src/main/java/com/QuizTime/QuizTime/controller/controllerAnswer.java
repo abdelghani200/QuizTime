@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.controller;
 
+import com.QuizTime.QuizTime.exception.ExceptionAnswer;
 import com.QuizTime.QuizTime.model.entity.Answer;
 import com.QuizTime.QuizTime.service.serviceInterface.answerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,11 @@ public class controllerAnswer {
     @DeleteMapping("/{answerId}")
     public void deleteAnswer(@PathVariable("answerId") Long id) {
         ServiceAnswer.deleteAnswer(id);
+    }
+
+    @PutMapping("/{answerId}")
+    public Answer updateAnswer(@RequestBody Answer answer, @PathVariable("answerId") Long id) throws ExceptionAnswer {
+        return ServiceAnswer.updateAnswer(answer, id);
     }
 
 }
