@@ -20,7 +20,7 @@ public class dataLevelPopulationController {
     @GetMapping
     public String populateData()
     {
-        levelFacker.populateLevelsWithFackerData(4);
+        levelFacker.populateLevelsWithFackerData(3);
         return "Fake data levels has been populated!";
     }
 

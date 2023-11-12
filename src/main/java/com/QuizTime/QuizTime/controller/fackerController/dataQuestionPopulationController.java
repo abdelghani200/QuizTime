@@ -22,7 +22,7 @@ public class dataQuestionPopulationController {
     @GetMapping
     public String populateData()
     {
-        questionFacker.populateQuestionsWithFakerData(14);
+        questionFacker.populateQuestionsWithFakerData(8);
         return "Fake data questions has been populated!";
     }
 

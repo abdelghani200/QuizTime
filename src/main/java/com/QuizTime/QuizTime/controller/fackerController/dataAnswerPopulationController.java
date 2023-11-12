@@ -21,7 +21,10 @@ public class dataAnswerPopulationController {
     @GetMapping
     public String populateData()
     {
+        /*
         answerFacker.populateAnswersWithFakerData();
+
+         */
         return "Fake data students has been populated!";
     }
 
