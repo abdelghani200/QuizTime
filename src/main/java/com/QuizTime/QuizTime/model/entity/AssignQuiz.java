@@ -1,17 +1,21 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
-@Table(name = "assign_quiz")
+@Table(name = "assignQuiz")
 public class AssignQuiz {
 
     @Id
@@ -24,12 +28,19 @@ public class AssignQuiz {
     private Integer attemptNumber;
     private Double scoreFinal;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = true)
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private Student student;
+
+
+    @OneToMany(mappedBy = "assignQuiz",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reponse> reponseList;
 
 
 }

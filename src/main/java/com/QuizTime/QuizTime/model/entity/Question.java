@@ -1,20 +1,22 @@
 package com.QuizTime.QuizTime.model.entity;
 
 import com.QuizTime.QuizTime.enums.TypeAnswer;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
-import java.sql.Time;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "questions")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Question {
 
     @Id
@@ -27,24 +29,25 @@ public class Question {
     private TypeAnswer type;
     private Double scorePoints;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = true)
-    private Quiz quiz;
 
-    @OneToMany(mappedBy = "question")
-    private List<Answer> answerList;
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Validation> validationList;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id")
     private Level level;
-    @ManyToOne
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id")
     private Subject subject;
-    @ManyToOne
-    private Media media;
-    @OneToOne
-    private Validation validation;
 
-    @ManyToMany
-    private List<AssignQuiz> assignedQuiz;
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Media> medias;
 
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionTemporation> questionTemporationList;
 
 }

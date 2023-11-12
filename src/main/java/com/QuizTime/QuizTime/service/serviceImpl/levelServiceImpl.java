@@ -23,7 +23,7 @@ public class levelServiceImpl implements levelService {
     }
 
     @Override
-    public void deleteLevel(Integer id) {
+    public void deleteLevel(Long id) {
         Repo_level.deleteById(id);
     }
 
@@ -33,12 +33,12 @@ public class levelServiceImpl implements levelService {
     }
 
     @Override
-    public Optional<Level> getOne(Integer id) {
+    public Optional<Level> getOne(Long id) {
         return Repo_level.findById(id);
     }
 
     @Override
-    public Level updateLevel(Level level, Integer id) throws ExceptionLevel {
+    public Level updateLevel(Level level, Long id) throws ExceptionLevel {
         return Repo_level.findById(id)
                 .map(existingLevel -> {
                     existingLevel.setDescription(level.getDescription());

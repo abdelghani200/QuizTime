@@ -35,9 +35,6 @@ public class answerServiceImpl implements answerService {
         return RepoAnswer.findById(id)
                 .map(existingAnswer -> {
                     existingAnswer.setAnswerText(answer.getAnswerText());
-                    existingAnswer.setCorrect(answer.getCorrect());
-                    existingAnswer.setQuestion(answer.getQuestion());
-
                     return RepoAnswer.save(existingAnswer);
                 })
                 .orElseThrow(() -> new ExceptionAnswer("Answer not found with ID: " + id));

@@ -11,13 +11,13 @@ import java.util.Optional;
 public interface levelService {
 
     List<Level> getAllLevels();
-    void deleteLevel(Integer id);
+    void deleteLevel(Long id);
 
     Level saveLevel(Level level);
 
-    Optional<Level> getOne(Integer id);
+    Optional<Level> getOne(Long id);
 
-    Level updateLevel(Level level, Integer id) throws ExceptionLevel;
+    Level updateLevel(Level level, Long id) throws ExceptionLevel;
 
 }
 

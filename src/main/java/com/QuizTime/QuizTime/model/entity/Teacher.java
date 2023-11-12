@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Teacher extends User{
     private long id;
     private String speciality;
 
-    @OneToMany(mappedBy = "teacher")
+
+    @OneToMany(mappedBy = "teacher",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Quiz> quizList;
 }

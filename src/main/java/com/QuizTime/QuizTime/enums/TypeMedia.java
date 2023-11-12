@@ -1,6 +1,6 @@
 package com.QuizTime.QuizTime.enums;
 
-public enum MediaType {
+public enum TypeMedia {
     image,
     figure,
     son,

@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,11 +25,8 @@ public class Student extends User{
     @Column(updatable = false, nullable = false)
     private LocalDate registrationDate;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignQuiz> assignQuiz;
 
-    /*
-    @Version
-    private Integer version;
-     */
+
 }

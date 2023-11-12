@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,13 +10,18 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "temporary_questions")
-public class TestQuestion {
+public class QuestionTemporation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
-    @ManyToOne
+    private Boolean timed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
     private Quiz quiz;
-    @OneToOne
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id")
     private Question question;
-    private int isTimed;
 }

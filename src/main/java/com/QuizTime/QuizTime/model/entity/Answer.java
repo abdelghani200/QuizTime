@@ -1,9 +1,13 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,8 +21,9 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String answerText;
-    private Boolean correct;
+    private Double point;
 
-    @ManyToOne
-    private Question question;
+    @OneToMany(mappedBy = "answer",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Validation> validationList;
+
 }

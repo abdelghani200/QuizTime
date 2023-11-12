@@ -25,6 +25,7 @@ public class fackerAnswer {
         this.RepoQuestion = RepoQuestion;
     }
 
+    /*
     @PostConstruct
     public void populateAnswersWithFakerData() {
         List<Answer> answers = new ArrayList();
@@ -33,12 +34,11 @@ public class fackerAnswer {
         for (Question question : questions) {
             Answer answer = new Answer();
             answer.setAnswerText(faker.lorem().sentence());
-            answer.setCorrect(faker.bool().bool());
-
-            answer.setQuestion(question);
             answers.add(answer);
         }
         Repo_answer.saveAll(answers);
     }
+
+     */
 
 }

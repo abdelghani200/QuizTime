@@ -9,27 +9,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/subjects")
+@CrossOrigin
 public class controllerSubject {
 
     @Autowired
     private subjectService ServiceSubject;
 
-    @GetMapping("/subjects")
+    @GetMapping()
     public List<Subject> getAllSubjects() {
         return ServiceSubject.getAllSubjects();
     }
 
-    @PostMapping("/subjects")
+    @PostMapping()
     public Subject saveSubject(@RequestBody Subject subject) {
         return ServiceSubject.saveSubject(subject);
     }
 
-    @DeleteMapping("/subjects/{subjectId}")
+    @DeleteMapping("/{subjectId}")
     public void deleteSubject(@PathVariable("subjectId") Integer id) {
         ServiceSubject.deleteSubject(id);
     }
 
-    @PutMapping("/subjects/{subjectId}")
+    @PutMapping("/{subjectId}")
     public Subject updateSubject(@PathVariable("subjectId") Integer id, @RequestBody Subject subject) throws ExceptionSubject {
         return ServiceSubject.updateSubject(subject, id);
     }

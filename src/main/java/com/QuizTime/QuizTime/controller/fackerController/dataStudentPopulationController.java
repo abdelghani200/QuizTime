@@ -20,7 +20,7 @@ public class dataStudentPopulationController {
     @GetMapping
     public String populateData()
     {
-        studentFacker.populateStudentsWithFackerData(4);
+        studentFacker.populateStudentsWithFackerData(5);
         return "Fake data students has been populated!";
     }
 
