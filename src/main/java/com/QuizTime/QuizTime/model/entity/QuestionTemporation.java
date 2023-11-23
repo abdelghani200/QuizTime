@@ -1,5 +1,6 @@
 package com.QuizTime.QuizTime.model.entity;
 
+import com.QuizTime.QuizTime.helpers.TemporationId;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,19 +10,21 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "temporary_questions")
+@Table(name = "QuestionTempo")
 public class QuestionTemporation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-    private Boolean timed;
+
+    @EmbeddedId
+    private TemporationId id ;
+    @Column
+    private int time;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_id")
+    @MapsId("quiz_id")
     private Quiz quiz;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
+    @MapsId("question_id")
     private Question question;
+
 }

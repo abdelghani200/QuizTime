@@ -26,13 +26,6 @@ public class fackerLevel {
 
         for(int i = 0; i < numbersOfRecords; i++){
             Level level = new Level();
-
-            /*
-            DecimalFormat df = new DecimalFormat("#.##");
-            double maxPoints = faker.random().nextDouble(1, 5);
-            level.setMaxPoints(Double.parseDouble(df.format(maxPoints)));
-             */
-
             level.setDescription(faker.lorem().sentence());
             double maxPoints = faker.random().nextDouble(1, 5);
             level.setMaxPoints(maxPoints);

@@ -2,6 +2,7 @@ package com.QuizTime.QuizTime.controller;
 
 import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
+import com.QuizTime.QuizTime.model.entity.dto.LevelDTO;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class controllerLevel {
     private levelService Level_service;
 
     @GetMapping
-    public List<Level> getAllLevels() {
+    public List<LevelDTO> getAllLevels() {
         return Level_service.getAllLevels();
     }
 
@@ -33,32 +34,18 @@ public class controllerLevel {
     }
 
     @PostMapping()
-    public Level saveLevel(@RequestBody Level level) {
+    public LevelDTO saveLevel(@RequestBody LevelDTO level) {
         return Level_service.saveLevel(level);
     }
 
-    /*
-    @PostMapping
-    public ResponseEntity<?> saveLevel(HttpServletRequest request, @RequestBody Level level) {
-        String contentType = request.getContentType();
-
-        if (MediaType.APPLICATION_JSON_VALUE.equals(contentType)) {
-            Level savedLevel = Level_service.saveLevel(level);
-            return ResponseEntity.ok(savedLevel);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Unsupported Media Type");
-        }
-    }
-
-     */
 
     @GetMapping("/{levelId}")
-    public Optional<Level> getOneLevel(@PathVariable("levelId") Long id) {
-        return Level_service.getOne(id);
+    public Optional<LevelDTO> getOneLevel(@PathVariable("levelId") Long id) {
+        return Level_service.getById(id);
     }
 
     @PutMapping("/{levelId}")
-    public Level updateLevel(@PathVariable Long levelId, @RequestBody Level level) throws ExceptionLevel {
+    public LevelDTO updateLevel(@PathVariable Long levelId, @RequestBody LevelDTO level) throws ExceptionLevel {
         return Level_service.updateLevel(level, levelId);
     }
 

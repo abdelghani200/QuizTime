@@ -1,6 +1,5 @@
 package com.QuizTime.QuizTime.model.entity;
 
-import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,13 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "validation")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Validation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double points;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
@@ -27,7 +24,7 @@ public class Validation {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reponse_id")
+    @JoinColumn(name = "response_id")
     private Answer answer;
 
     @OneToMany(mappedBy = "validation",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

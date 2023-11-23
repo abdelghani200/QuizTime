@@ -1,7 +1,8 @@
 package com.QuizTime.QuizTime.controller;
 
-import com.QuizTime.QuizTime.exception.ExceptionSubject;
-import com.QuizTime.QuizTime.model.entity.Subject;
+
+import com.QuizTime.QuizTime.helpers.SubjectResDTO;
+import com.QuizTime.QuizTime.model.entity.dto.SubjectDTO;
 import com.QuizTime.QuizTime.service.serviceInterface.subjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,13 @@ public class controllerSubject {
     private subjectService ServiceSubject;
 
     @GetMapping()
-    public List<Subject> getAllSubjects() {
+    public List<SubjectResDTO> getAllSubjects() {
         return ServiceSubject.getAllSubjects();
     }
 
     @PostMapping()
-    public Subject saveSubject(@RequestBody Subject subject) {
-        return ServiceSubject.saveSubject(subject);
+    public SubjectDTO saveSubject(@RequestBody SubjectDTO subject) {
+        return ServiceSubject.createSubject(subject);
     }
 
     @DeleteMapping("/{subjectId}")
@@ -32,7 +33,7 @@ public class controllerSubject {
     }
 
     @PutMapping("/{subjectId}")
-    public Subject updateSubject(@PathVariable("subjectId") Integer id, @RequestBody Subject subject) throws ExceptionSubject {
+    public SubjectDTO updateSubject(@PathVariable("subjectId") Integer id, @RequestBody SubjectDTO subject) {
         return ServiceSubject.updateSubject(subject, id);
     }
 

@@ -4,6 +4,9 @@ import com.QuizTime.QuizTime.enums.TypeAnswer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class QuestionDTO {
@@ -15,4 +18,5 @@ public class QuestionDTO {
     private Double scorePoints;
     private LevelDTO level;
     private SubjectDTO subject;
+    private List<MediaDTO> medias = new ArrayList<>();
 }

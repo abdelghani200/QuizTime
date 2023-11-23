@@ -17,14 +17,9 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     protected String firstName;
     protected String lastName;
     protected LocalDate dateOfBirth;
     protected String address;
-
-
 
 }

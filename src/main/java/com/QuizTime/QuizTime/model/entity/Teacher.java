@@ -2,6 +2,7 @@ package com.QuizTime.QuizTime.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -15,9 +16,12 @@ import java.util.List;
 @Entity
 @Table(name = "teachers")
 public class Teacher extends User{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank(message = "La specialitie ne peut pas etre vide")
     private String speciality;
 
 

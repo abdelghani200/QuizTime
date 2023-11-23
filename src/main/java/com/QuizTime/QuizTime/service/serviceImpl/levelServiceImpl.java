@@ -1,15 +1,19 @@
 package com.QuizTime.QuizTime.service.serviceImpl;
 
+import com.QuizTime.QuizTime.exception.CustomException;
 import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
+import com.QuizTime.QuizTime.model.entity.dto.LevelDTO;
 import com.QuizTime.QuizTime.repository.levelRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class levelServiceImpl implements levelService {
@@ -17,9 +21,15 @@ public class levelServiceImpl implements levelService {
     @Autowired
     private levelRepository Repo_level;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public List<Level> getAllLevels() {
-        return Repo_level.findAll();
+    public List<LevelDTO> getAllLevels() {
+        List<Level> levels = Repo_level.findAll();
+        return levels.stream()
+                .map(level -> modelMapper.map(level, LevelDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -28,25 +38,28 @@ public class levelServiceImpl implements levelService {
     }
 
     @Override
-    public Level saveLevel( Level level) {
-        return Repo_level.save(level);
+    public LevelDTO saveLevel(LevelDTO levelDTO) {
+        Level level = modelMapper.map(levelDTO, Level.class);
+        Level savedLevel = Repo_level.save(level);
+        return modelMapper.map(savedLevel, LevelDTO.class);
     }
 
     @Override
-    public Optional<Level> getOne(Long id) {
-        return Repo_level.findById(id);
+    public LevelDTO updateLevel(LevelDTO levelDTO, Long id) {
+        Optional<Level> existingLevelOptional = Repo_level.findById(id);
+        if (existingLevelOptional.isEmpty()) {
+            throw new CustomException("Level not found with ID: " + id);
+        }
+
+        Level existingLevel = existingLevelOptional.get();
+        modelMapper.map(levelDTO, existingLevel);
+        Level updatedLevel = Repo_level.save(existingLevel);
+        return modelMapper.map(updatedLevel, LevelDTO.class);
     }
 
     @Override
-    public Level updateLevel(Level level, Long id) throws ExceptionLevel {
-        return Repo_level.findById(id)
-                .map(existingLevel -> {
-                    existingLevel.setDescription(level.getDescription());
-                    existingLevel.setMaxPoints(level.getMaxPoints());
-                    existingLevel.setMinPoints(level.getMinPoints());
-                    return Repo_level.save(existingLevel);
-                })
-                .orElseThrow(() -> new ExceptionLevel("Level not found with ID: " + id));
+    public Optional<LevelDTO> getById(Long id) {
+        Optional<Level> level = Repo_level.findById(id);
+        return level.map(value -> modelMapper.map(value, LevelDTO.class));
     }
-
 }

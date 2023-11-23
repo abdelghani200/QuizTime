@@ -1,25 +1,24 @@
 package com.QuizTime.QuizTime.service.serviceInterface;
 
-import com.QuizTime.QuizTime.exception.ExceptionQuestion;
-import com.QuizTime.QuizTime.model.entity.Question;
+
+import com.QuizTime.QuizTime.model.entity.dto.AnswerQuestionDTO;
 import com.QuizTime.QuizTime.model.entity.dto.QuestionDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface questionService {
 
-    List<QuestionDTO> getAllQuestions();
+    List<QuestionDTO> getAllQuestions(int page, int size);
 
     QuestionDTO saveQuestion(QuestionDTO questionDTO);
 
-    QuestionDTO updateQuestion(QuestionDTO questionDTO, long id) throws ExceptionQuestion;
+    QuestionDTO updateQuestion(QuestionDTO questionDTO, long id);
 
     void deleteQuestion(long id);
 
-    Optional<Question> getOne(long id);
+    AnswerQuestionDTO findByID(Long id);
 
 
 }

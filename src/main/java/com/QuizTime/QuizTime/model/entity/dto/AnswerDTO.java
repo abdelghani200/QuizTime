@@ -9,6 +9,4 @@ public class AnswerDTO {
 
     private long id;
     private String answerText;
-    private Double point;
-
 }

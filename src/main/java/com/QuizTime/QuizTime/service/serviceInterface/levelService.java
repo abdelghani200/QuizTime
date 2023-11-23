@@ -2,6 +2,7 @@ package com.QuizTime.QuizTime.service.serviceInterface;
 
 import com.QuizTime.QuizTime.exception.ExceptionLevel;
 import com.QuizTime.QuizTime.model.entity.Level;
+import com.QuizTime.QuizTime.model.entity.dto.LevelDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,14 +11,14 @@ import java.util.Optional;
 @Service
 public interface levelService {
 
-    List<Level> getAllLevels();
+    List<LevelDTO> getAllLevels();
     void deleteLevel(Long id);
 
-    Level saveLevel(Level level);
+    LevelDTO saveLevel(LevelDTO levelDTO);
 
-    Optional<Level> getOne(Long id);
+    Optional<LevelDTO> getById(Long id);
 
-    Level updateLevel(Level level, Long id) throws ExceptionLevel;
+    LevelDTO updateLevel(LevelDTO levelDTO, Long id);
 
 }
 
