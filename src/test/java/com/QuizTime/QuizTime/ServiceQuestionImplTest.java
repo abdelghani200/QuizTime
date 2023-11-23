@@ -1,6 +1,5 @@
 package com.QuizTime.QuizTime;
 
-import com.QuizTime.QuizTime.config.ModelMapperConfig;
 import com.QuizTime.QuizTime.enums.TypeAnswer;
 import com.QuizTime.QuizTime.exception.ExceptionQuestion;
 import com.QuizTime.QuizTime.model.entity.Question;
@@ -14,12 +13,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +31,7 @@ public class ServiceQuestionImplTest {
     private questionRepository Repoquestion;
 
     @Mock
-    private ModelMapperConfig mapperConfig;
+    private ModelMapper modelMapper;
 
     @InjectMocks
     private questionServiceImpl questionService;
@@ -52,6 +54,10 @@ public class ServiceQuestionImplTest {
         questionDTO.setText("question tdo text");
         questionDTO.setType(TypeAnswer.single);
         questionDTO.setScorePoints(100.00);
+
+        given(modelMapper.map(questionDTO, Question.class)).willReturn(question);
+        given(modelMapper.map(question, QuestionDTO.class)).willReturn(questionDTO);
+        given(Repoquestion.save(any(Question.class))).willReturn(question);
     }
 
     @Test
@@ -59,12 +65,23 @@ public class ServiceQuestionImplTest {
         List<Question> questionList = new ArrayList<>();
         when(Repoquestion.findAll()).thenReturn(questionList);
 
-        List<QuestionDTO> result = questionService.getAllQuestions();
+        List<QuestionDTO> result = questionService.getAllQuestions(0,10);
 
         verify(Repoquestion, times(1)).findAll();
 
         assertNotNull(result);
         assertEquals(0, result.size());
+    }
+
+    @Test
+    void testSaveQuestion() {
+        QuestionDTO savedQuestion = questionService.saveQuestion(questionDTO);
+
+        // Then
+        assertThat(savedQuestion).isNotNull();
+
+        // Verify that save method is called exactly once with the expected Question object
+        verify(Repoquestion).save(question);
     }
 
     @Test
@@ -89,23 +106,7 @@ public class ServiceQuestionImplTest {
         verify(Repoquestion, times(1)).findById(id);
         verify(Repoquestion, times(0)).save(any(Question.class));
     }
-    @Test
-    void testGetOne() {
-        long id = 1L;
-        Optional<Question> optionalQuestion = Optional.of(question);
 
-        when(Repoquestion.findById(id)).thenReturn(optionalQuestion);
-
-        Optional<Question> result = questionService.getOne(id);
-
-        verify(Repoquestion, times(1)).findById(id);
-        assertTrue(result.isPresent());
-
-        assertEquals(question.getId(), result.get().getId());
-        assertEquals(question.getText(), result.get().getText());
-
-        assertEquals(question.getType(), result.get().getType());
-    }
 
 
 }

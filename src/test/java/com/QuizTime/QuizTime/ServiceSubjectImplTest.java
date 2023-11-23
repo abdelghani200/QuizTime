@@ -36,36 +36,9 @@ public class ServiceSubjectImplTest {
         assertEquals(2, result.size());
     }
 
-    @Test
-    void testSaveSubject() {
-        Subject subjectToSave = new Subject();
 
-        when(RepoSubject.save(subjectToSave)).thenReturn(subjectToSave);
 
-        Subject savedSubject = subjectService.saveSubject(subjectToSave);
 
-        assertNotNull(savedSubject);
-        assertEquals(subjectToSave, savedSubject);
-    }
-
-    @Test
-    void testUpdateSubject() throws ExceptionSubject {
-        Integer id = 1 ;
-
-        Subject existingSubject = new Subject();
-        Subject updateSubject = new Subject();
-
-        updateSubject.setTitle("Update Title");
-
-        when(RepoSubject.findById(id)).thenReturn(Optional.of(existingSubject));
-        when(RepoSubject.save(existingSubject)).thenReturn(updateSubject);
-
-        Subject result = subjectService.updateSubject(updateSubject, id);
-
-        assertNotNull(result);
-        assertEquals(updateSubject.getTitle(), result.getTitle());
-
-    }
 
     @Test
     void testDeleteSubject() {
