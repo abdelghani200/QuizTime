@@ -24,8 +24,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.eq; // Import the eq method
-import static org.mockito.ArgumentMatchers.any;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,33 +109,28 @@ public class ServicequizImplTest {
 
     @Test
     public void testGetAllQuiz() {
-        // Arrange
         int page = 0;
         int size = 10;
         Pageable pageable = PageRequest.of(page, size);
-        Page<Quiz> mockPage = new PageImpl<>(List.of(quiz)); // Mocking a page of quizzes
+        Page<Quiz> mockPage = new PageImpl<>(List.of(quiz));
         given(repoQuiz.findAll(pageable)).willReturn(mockPage);
 
-        // Act
         List<QuizDTO> quizList = quizService.getAllQuiz(page, size);
 
-        // Assert
         assertThat(quizList).isNotEmpty();
         assertThat(quizList.size()).isEqualTo(1);
-        // Add more assertions based on the properties you expect
+
     }
 
     @Test
     public void testDeleteQuiz() {
-        // Arrange
+
         Long quizId = 1L;
         given(repoQuiz.findById(quizId)).willReturn(Optional.of(quiz));
         willDoNothing().given(repoQuiz).delete(quiz);
 
-        // Act
         quizService.deleteQuiz(quizId);
 
-        // Assert
         verify(repoQuiz, times(1)).findById(quizId);
         verify(repoQuiz, times(1)).delete(quiz);
     }
