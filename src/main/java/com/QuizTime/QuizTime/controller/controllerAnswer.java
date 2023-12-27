@@ -47,6 +47,7 @@ public class controllerAnswer {
     }
 
     @PutMapping("/{answerId}")
+    @CrossOrigin
     public AnswerDTO updateAnswer(@Valid @RequestBody AnswerDTO answer, @PathVariable("answerId") Long id) throws ExceptionAnswer {
         return ServiceAnswer.updateAnswer(answer, id);
     }

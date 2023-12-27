@@ -45,6 +45,7 @@ public class controllerLevel {
     }
 
     @PutMapping("/{levelId}")
+    @CrossOrigin
     public LevelDTO updateLevel(@PathVariable Long levelId, @RequestBody LevelDTO level) throws ExceptionLevel {
         return Level_service.updateLevel(level, levelId);
     }

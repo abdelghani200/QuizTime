@@ -9,4 +9,6 @@ import java.util.List;
 public interface serviceTeacher {
     TeacherDTO saveTeachers(TeacherDTO teacherDTO);
     List<TeacherDTO> getAllTeachers();
+
+    void deleteTeacher(Long id);
 }

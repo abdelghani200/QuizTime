@@ -43,13 +43,12 @@ public class Question {
     @Valid
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Validation> validationList;
+ 
 
-    @NotNull(message = "le niveau ne peut pas etre null")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
     private Level level;
 
-    @NotNull(message = "Le sujet ne peut pas être nul")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;

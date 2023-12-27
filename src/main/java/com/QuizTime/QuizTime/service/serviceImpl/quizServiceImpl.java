@@ -1,9 +1,11 @@
 package com.QuizTime.QuizTime.service.serviceImpl;
 
 import com.QuizTime.QuizTime.exception.CustomException;
+import com.QuizTime.QuizTime.model.entity.Question;
 import com.QuizTime.QuizTime.model.entity.Quiz;
 import com.QuizTime.QuizTime.model.entity.Teacher;
 import com.QuizTime.QuizTime.model.entity.dto.QuizDTO;
+import com.QuizTime.QuizTime.repository.questionRepository;
 import com.QuizTime.QuizTime.repository.quizRepository;
 import com.QuizTime.QuizTime.repository.teacherRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.quizService;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class quizServiceImpl implements quizService {
@@ -29,6 +32,9 @@ public class quizServiceImpl implements quizService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private questionRepository Repoquestion;
 
     @Override
     public QuizDTO saveQuiz(QuizDTO quizDTO) {
@@ -90,6 +96,33 @@ public class quizServiceImpl implements quizService {
 
         return modelMapper.map(quiz, QuizDTO.class);
     }
+
+    /*
+    @Transactional
+    @Override
+    public QuizDTO addQuestionsToQuiz(Long quizId, List<Long> questionIds) {
+        // Récupérer le quiz existant
+        Quiz quiz = RepoQuiz.findById(quizId)
+                .orElseThrow(() -> new CustomException("The quiz with ID " + quizId + " is not found"));
+
+        // Récupérer les questions à ajouter au quiz
+        List<Question> questionsToAdd = questionIds.stream()
+                .map(questionId -> Repoquestion.findById(questionId)
+                        .orElseThrow(() -> new CustomException("Question not found with ID: " + questionId)))
+                .collect(Collectors.toList());
+
+        // Ajouter les questions au quiz
+        quiz.getQuestions().addAll(questionsToAdd);
+
+        // Mettre à jour le quiz dans la base de données
+        Quiz updatedQuiz = RepoQuiz.save(quiz);
+
+        // Mapper et retourner le résultat
+        return modelMapper.map(updatedQuiz, QuizDTO.class);
+    }
+
+     */
+
 
 
 }

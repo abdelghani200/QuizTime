@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/quiz")
+@CrossOrigin
 public class controllerQuiz {
 
     @Autowired

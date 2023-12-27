@@ -8,10 +8,12 @@ import com.QuizTime.QuizTime.repository.teacherRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.serviceTeacher;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class teacherServiceImpl implements serviceTeacher {
 
     @Autowired
@@ -32,7 +34,12 @@ public class teacherServiceImpl implements serviceTeacher {
     public List<TeacherDTO> getAllTeachers() {
         List<Teacher> teachers = RepoTeacher.findAll();
         return teachers.stream()
-                .map(level -> modelMapper.map(teachers, TeacherDTO.class))
+                .map(teacher -> modelMapper.map(teacher, TeacherDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteTeacher(Long id) {
+        RepoTeacher.deleteById(id);
     }
 }

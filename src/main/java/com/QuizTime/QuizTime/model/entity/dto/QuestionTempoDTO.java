@@ -11,10 +11,7 @@ import lombok.NoArgsConstructor;
 public class QuestionTempoDTO {
 
     private Long question_id;
-    @NotNull(message = "quiz id can't be null")
-    @Min(value = 1, message = "quiz id can't be less then 1")
     private Long quiz_id;
-    @NotNull(message = "question time must can't be empty")
     private Integer time;
 
 }

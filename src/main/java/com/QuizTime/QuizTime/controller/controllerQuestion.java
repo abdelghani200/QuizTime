@@ -1,9 +1,12 @@
 package com.QuizTime.QuizTime.controller;
 
-import com.QuizTime.QuizTime.model.entity.dto.AnswerQuestionDTO;
+import com.QuizTime.QuizTime.helpers.MediaResDTO;
+import com.QuizTime.QuizTime.helpers.QuestionResDTO;
+import com.QuizTime.QuizTime.helpers.TempoQuestionRes;
+import com.QuizTime.QuizTime.model.entity.dto.*;
 import com.QuizTime.QuizTime.exception.ExceptionQuestion;
-import com.QuizTime.QuizTime.model.entity.dto.QuestionDTO;
 import com.QuizTime.QuizTime.service.serviceInterface.questionService;
+import com.QuizTime.QuizTime.service.serviceInterface.questionTempo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,22 +22,22 @@ public class controllerQuestion {
     @Autowired
     private questionService ServiceQues;
 
+    @Autowired
+    private questionTempo TempoQuestion;
 
-    @GetMapping
-    public List<QuestionDTO> getAllQuestions(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ServiceQues.getAllQuestions(page, size);
+    @GetMapping()
+    public List<QuestionDTO> getAll() {
+        return ServiceQues.AllQuestions();
     }
 
     @PostMapping
-    public QuestionDTO saveQuestion(@Valid @RequestBody QuestionDTO question) {
+    public QuestionResDTO saveQuestion(@Valid @RequestBody QuestionResDTO question) {
         return ServiceQues.saveQuestion(question);
     }
 
 
     @PutMapping("/{questionId}")
-    public QuestionDTO updateQuestion(@PathVariable("questionId") Long id, @Valid @RequestBody QuestionDTO question){
+    public QuestionResDTO updateQuestion(@PathVariable("questionId") Long id, @Valid @RequestBody QuestionResDTO question){
         ServiceQues.updateQuestion(question, id);
         return question;
     }
@@ -51,5 +54,24 @@ public class controllerQuestion {
         return ServiceQues.findByID(id);
     }
 
+    @GetMapping("/medias")
+    public List<MediaResDTO> getAllMedia() {
+        return ServiceQues.getAllMedia();
+    }
+
+
+    @PostMapping("/tempo")
+    public QuestionTempoDTO  saveTempoQuestion(@Valid @RequestBody QuestionTempoDTO questionTempoDTO) {
+        return TempoQuestion.saveTempoQuestion(questionTempoDTO);
+    }
+
+    @GetMapping("/tempo")
+    public List<TempoQuestionRes> getAllTempoQuestions() {
+        return TempoQuestion.getAllTempoQuestions();
+    }
+    @GetMapping("/tempo/{quizID}")
+    public List<TempoQuestionRes> getTempoQuestionsForQuiz(@PathVariable("quizID") Long quizID){
+        return TempoQuestion.getTempoQuestionsForQuiz(quizID);
+    }
 
 }

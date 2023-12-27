@@ -1,9 +1,14 @@
 package com.QuizTime.QuizTime.service.serviceImpl;
 
 import com.QuizTime.QuizTime.exception.CustomException;
+import com.QuizTime.QuizTime.helpers.MediaResDTO;
+import com.QuizTime.QuizTime.helpers.QuestionResDTO;
+import com.QuizTime.QuizTime.model.entity.Level;
+import com.QuizTime.QuizTime.model.entity.Subject;
 import com.QuizTime.QuizTime.model.entity.dto.AnswerQuestionDTO;
 import com.QuizTime.QuizTime.model.entity.Media;
 import com.QuizTime.QuizTime.model.entity.Question;
+import com.QuizTime.QuizTime.model.entity.dto.LevelDTO;
 import com.QuizTime.QuizTime.model.entity.dto.MediaDTO;
 import com.QuizTime.QuizTime.model.entity.dto.QuestionDTO;
 import com.QuizTime.QuizTime.repository.levelRepository;
@@ -52,20 +57,40 @@ public class questionServiceImpl implements questionService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<QuestionDTO> AllQuestions() {
+        List<Question> questions = Repoquestion.findAll();
+        return questions.stream()
+                .map(question -> modelMapper.map(question, QuestionDTO.class))
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     @Override
-    public QuestionDTO saveQuestion(QuestionDTO questionDTO) {
+    public QuestionResDTO saveQuestion(QuestionResDTO questionResDTO) {
 
-        Question question = modelMapper.map(questionDTO, Question.class);
+        Question question = modelMapper.map(questionResDTO, Question.class);
 
-        if (questionDTO.getMedias() != null) {
-            for (MediaDTO mediaDTO : questionDTO.getMedias()) {
-                mediaDTO.setQuestionDTO(questionDTO);
+        if (questionResDTO.getLevel_id() != null) {
+            Level level = Repolevel.findById(questionResDTO.getLevel_id())
+                    .orElseThrow(() -> new CustomException("Level not found"));
+            question.setLevel(level);
+        }
+
+        if (questionResDTO.getSubject_id() != null) {
+            Subject subject = Reposubject.findById(questionResDTO.getSubject_id())
+                    .orElseThrow(() -> new CustomException("Subject not found"));
+            question.setSubject(subject);
+        }
+
+        if (questionResDTO.getMedias() != null) {
+            for (MediaDTO mediaDTO : questionResDTO.getMedias()) {
+                mediaDTO.setQuestionDTO(questionResDTO);
             }
         }
 
-        assert questionDTO.getMedias() != null;
-        List<Media> mediaList = questionDTO.getMedias()
+        assert questionResDTO.getMedias() != null;
+        List<Media> mediaList = questionResDTO.getMedias()
                 .stream()
                 .map(mediaDTO -> modelMapper.map(mediaDTO, Media.class))
                 .collect(Collectors.toList());
@@ -77,8 +102,10 @@ public class questionServiceImpl implements questionService {
 
         return mapQuestionToQuestionDTO(savedQuestion);
     }
-    private QuestionDTO mapQuestionToQuestionDTO(Question question) {
-        QuestionDTO questionDTO = modelMapper.map(question, QuestionDTO.class);
+
+
+    private QuestionResDTO mapQuestionToQuestionDTO(Question question) {
+        QuestionResDTO questionDTO = modelMapper.map(question, QuestionResDTO.class);
 
         questionDTO.setMedias(
                 question.getMedias()
@@ -90,21 +117,33 @@ public class questionServiceImpl implements questionService {
     }
 
     @Override
-    public QuestionDTO updateQuestion(QuestionDTO questionDTO, long id) {
+    public QuestionResDTO updateQuestion(QuestionResDTO questionDTO, long id) {
         Optional<Question> optionalQuestion = Repoquestion.findById(id);
         if (optionalQuestion.isEmpty()) {
             throw new CustomException("Question not found with ID: " + id);
         }
         Question existingQuestion = optionalQuestion.get();
 
-        // Update only the fields you want to change
+
         existingQuestion.setText(questionDTO.getText());
         existingQuestion.setAnswerNumber(questionDTO.getAnswerNumber());
-        // Update other fields as needed
+        existingQuestion.setScorePoints(questionDTO.getScorePoints());
+
+        if (questionDTO.getLevel_id() != null) {
+            Level level = Repolevel.findById(questionDTO.getLevel_id())
+                    .orElseThrow(() -> new CustomException("Level not found"));
+            existingQuestion.setLevel(level);
+        }
+
+        if (questionDTO.getSubject_id() != null) {
+            Subject subject = Reposubject.findById(questionDTO.getSubject_id())
+                    .orElseThrow(() -> new CustomException("Subject not found"));
+            existingQuestion.setSubject(subject);
+        }
 
         Question updatedQuestion = Repoquestion.save(existingQuestion);
 
-        return modelMapper.map(updatedQuestion, QuestionDTO.class);
+        return modelMapper.map(updatedQuestion, QuestionResDTO.class);
     }
 
 
@@ -121,6 +160,13 @@ public class questionServiceImpl implements questionService {
         return modelMapper.map(question, AnswerQuestionDTO.class);
     }
 
+    @Override
+    public List<MediaResDTO> getAllMedia() {
+        List<Media> mediaList = RepoMedia.findAll();
+        return mediaList.stream()
+                .map(media -> modelMapper.map(media, MediaResDTO.class))
+                .collect(Collectors.toList());
+    }
 
 
 

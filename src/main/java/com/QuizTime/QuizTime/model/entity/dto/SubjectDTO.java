@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+/*
 @JsonInclude(JsonInclude.Include.NON_NULL)
+
+ */
 public class SubjectDTO {
     private Integer id;
     private String  title;

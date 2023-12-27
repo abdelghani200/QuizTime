@@ -21,10 +21,9 @@ public class Teacher extends User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "La specialitie ne peut pas etre vide")
     private String speciality;
 
 
-    @OneToMany(mappedBy = "teacher",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "teacher",fetch = FetchType.LAZY)
     private List<Quiz> quizList;
 }

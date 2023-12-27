@@ -1,6 +1,7 @@
 package com.QuizTime.QuizTime.controller;
 
 
+import com.QuizTime.QuizTime.helpers.ValidationRes;
 import com.QuizTime.QuizTime.model.entity.dto.AnswerQuestionDTO;
 import com.QuizTime.QuizTime.model.entity.dto.ValidationDTO;
 import com.QuizTime.QuizTime.service.serviceInterface.answerService;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @Validated
 @RequestMapping(value = "/validations")
+@CrossOrigin
 public class controllerValidation {
 
     @Autowired
@@ -35,7 +37,10 @@ public class controllerValidation {
         return ResponseEntity.ok(savedValidationDto);
     }
 
-
+    @GetMapping
+    public List<ValidationRes> getAllValidation(){
+        return validationService.getValidations();
+    }
 
 
 }

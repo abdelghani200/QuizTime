@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TeacherDTO extends UserDTO {
-    private long id;
+
     private String speciality;
 }

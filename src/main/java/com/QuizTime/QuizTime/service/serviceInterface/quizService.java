@@ -18,4 +18,6 @@ public interface quizService {
 
     QuizDTO deleteQuiz(Long id);
 
+
+
 }
