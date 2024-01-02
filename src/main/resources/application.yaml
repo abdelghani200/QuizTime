@@ -13,3 +13,4 @@ spring:
       ddl-auto: update
       dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+    package-to-scan: com.QuizTime.QuizTime.model.entity.Chat

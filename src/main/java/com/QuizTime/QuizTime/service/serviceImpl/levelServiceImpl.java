@@ -8,6 +8,8 @@ import com.QuizTime.QuizTime.repository.levelRepository;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -62,4 +64,10 @@ public class levelServiceImpl implements levelService {
         Optional<Level> level = Repo_level.findById(id);
         return level.map(value -> modelMapper.map(value, LevelDTO.class));
     }
+
+    @Override
+    public Page<LevelDTO> getLevels(Pageable pageable) {
+        return Repo_level.findAll(pageable).map(competition -> modelMapper.map(competition, LevelDTO.class));
+    }
 }
+

@@ -5,6 +5,8 @@ import com.QuizTime.QuizTime.model.entity.Level;
 import com.QuizTime.QuizTime.model.entity.dto.LevelDTO;
 import com.QuizTime.QuizTime.service.serviceInterface.levelService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,13 @@ public class controllerLevel {
     @GetMapping
     public List<LevelDTO> getAllLevels() {
         return Level_service.getAllLevels();
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<LevelDTO>> getAllLevels(Pageable pageable){
+        Page<LevelDTO> levels = Level_service.getLevels(pageable);
+
+        return ResponseEntity.ok(levels);
     }
 
     @DeleteMapping("/{levelId}")
